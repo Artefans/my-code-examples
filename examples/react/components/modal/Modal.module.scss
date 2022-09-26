@@ -1,0 +1,124 @@
+@import '../../../styles/static/mixins';
+
+.wrap {
+  --width: 572px;
+  --height: auto;
+  --maxHeight: calc(100% - (var(--mainPadding) * 2));
+  --radius: 24px;
+  --padding: 34px 24px;
+  --closeSize: 30px;
+  --opacity: 0;
+  --visibility: hidden;
+
+  @include media {
+    --padding: 48px;
+    --closeSize: 40px;
+  }
+
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(0 0 0 / 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: var(--opacity);
+  visibility: var(--visibility);
+  transition: opacity .3s, visibility .3s;
+
+  &.big {
+    --width: 1000px;
+
+    @include media {
+      --maxHeight: 640px;
+      --height: 640px;
+    }
+  }
+
+  &.open {
+    --opacity: 1;
+    --visibility: visible;
+  }
+}
+
+.inner {
+  width: calc(100% - (var(--mainPadding) * 2));
+  max-width: var(--width);
+  height: var(--height);
+  max-height: var(--maxHeight);
+  background: var(--primaryWhite);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  > :last-child {
+    padding-right: 3px;
+  }
+
+  @include scrollbar(2px, 2px, transparent, var(--primaryBlack));
+
+  [class*='title'] {
+    font-weight: 400;
+    color: var(--primaryBlack);
+    font-size: 26px;
+    line-height: 110%;
+  }
+
+  [class*='note'] {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-black-shadow);
+    margin-top: 8px;
+  }
+
+  @include media {
+    [class*='title'] {
+      font-size: 32px;
+    }
+
+    [class*='note'] {
+      font-size: 16px;
+      margin-top: 12px;
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  right: 12px;
+  width: var(--closeSize);
+  height: var(--closeSize);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: var(--primaryBlack5ToDarck);
+
+  @include media {
+    top: 20px;
+    right: 20px;
+  }
+
+  svg path {
+    fill: var(--primaryBlack);
+  }
+}

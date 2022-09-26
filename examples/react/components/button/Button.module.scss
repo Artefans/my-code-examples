@@ -1,0 +1,177 @@
+@import '../../../styles/static/mixins';
+
+.button {
+  --btnPaddings: 0 15px;
+  --fontSize: 14px;
+  --borderRadius: 8px;
+  --color: var(--primaryTextColorWhite);
+  --background: var(--primaryRed);
+  --hoverBg: var(--secondaryRed);
+  --hoverColor: var(--primaryTextColorWhite);
+  --minWidth: 119px;
+  --height: 40px;
+
+  font-weight: 400;
+  font-size: var(--fontSize);
+  line-height: 1;
+  color: var(--color);
+  min-width: var(--minWidth);
+  display: flex;
+  align-items: center;
+  background-color: var(--background);
+  border-radius: var(--borderRadius);
+  border: none;
+  height: var(--height);
+  text-align: center;
+  justify-content: center;
+  padding: var(--btnPaddings);
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+
+  &:disabled {
+    --hoverBg: var(--primaryBlack40);
+
+    background-color: var(--primaryBlack20);
+    color: var(--primaryWhite);
+    cursor: not-allowed;
+  }
+
+  @include media {
+    --fontSize: 18px;
+    --height: 60px;
+    --btnPaddings: 0 32px;
+  }
+
+  @include desktop-hover {
+    background-color: var(--hoverBg);
+    color: var(--hoverColor);
+  }
+}
+
+.black {
+  background-color: var(--primaryBlack) !important;
+  color: var(--primaryWhite) !important;
+  padding: 0 10px;
+}
+
+.blocked {
+  --background: var(--primaryBlack10ToGray);
+  --hoverBg: var(--primaryBlack20);
+  --color: var(--primaryBlack60);
+  --hoverColor: var(--primaryBlack);
+}
+
+.gray {
+  --background: var(--primaryBlack5);
+  --hoverBg: var(--color-gray);
+  --hoverColor: var(--primaryBlack80);
+
+  color: var(--primaryBlack80);
+}
+
+.white {
+  --color: var(--primaryBlack80);
+  --background: var(--primaryWhiteToGray);
+  --hoverBg: var(--primaryRed);
+}
+
+.pill {
+  --borderRadius: 100px;
+}
+
+.textVariant {
+  --borderRadius: 0;
+  --color: var(--primaryRed);
+  --background: initial;
+  --hoverBg: initial;
+  --hoverColor: var(--secondaryRed);
+}
+
+.secondary {
+  --color: var(--primaryRed);
+  --background: var(--primaryRed10);
+  --hoverBg: var(--primaryRed20);
+  --hoverColor: var(--primaryRed);
+}
+
+.outline {
+  --color: var(--primaryRed);
+  --background: var(--primaryWhite);
+  --hoverBg: var(--primaryRed10);
+  --hoverColor: var(--secondaryRed);
+
+  border: 2px solid var(--primaryBlack10ToGray);
+}
+
+.border {
+  border: 2px solid var(--primaryRed);
+
+  --color: var(--primaryRed);
+  --background: transparent;
+}
+
+.small {
+  --fontSize: 10px;
+  --height: 32px;
+  --btnPaddings: 0 12px;
+  --minWidth: auto;
+}
+
+.normal {
+  --fontSize: 14px;
+  --height: 40px;
+  --minWidth: auto;
+}
+
+.text {
+  --btnPaddings: 0 14px;
+  --height: 48px;
+  --minWidth: var(--height);
+  --iconWidth: 20px;
+  --indent: 10px;
+  --maxWidth: var(--height);
+
+  width: 100%;
+  max-width: var(--maxWidth);
+  transition: background-color .3s, color .3s, max-width .3s;
+
+  .icon {
+    width: 30px;
+  }
+
+  @include desktop-hover {
+    --maxWidth: var(--msw);
+
+    transition: background-color .3s, color .3s, max-width .5s;
+
+    .textContent {
+      padding: 0 var(--indent) 0 calc(var(--indent) + var(--iconWidth));
+      max-width: var(--msw);
+      opacity: 1;
+    }
+  }
+
+  @include media {
+    --btnPaddings: 0 16px;
+    --height: 56px;
+    --iconWidth: 24px;
+  }
+}
+
+.textContent {
+  padding-left: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  width: 100%;
+  opacity: 0;
+  transition: padding .3s, max-width .3s, opacity .3s;
+}
+
+.textIcon {
+  transform: rotate(90deg);
+  flex-shrink: 0;
+  width: var(--iconWidth);
+  height: var(--iconWidth);
+}

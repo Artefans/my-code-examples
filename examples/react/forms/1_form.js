@@ -368,7 +368,7 @@ const AddressModal = ({ isOpen, setIsOpen, values, onSubmit, title, removeFullAd
             />
           </div>
           <div className={claimPageStyles.buttonWrapper}>
-            <button onClick={handleCancel} className={claimPageStyles.buttonCancel}>Отменить</button>
+            <button onClick={handleCancel} className={claimPageStyles.buttonCancel}>Can</button>
             <button onClick={formik.handleSubmit} className="button-extend confirm">Добавить</button>
           </div>
         </div>

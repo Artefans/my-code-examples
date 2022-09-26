@@ -9,7 +9,6 @@ import { DOTS, usePagination } from '../../utils/usePagination';
  * @param {string, number} totalCount
  */
 
-
 function Pagination({ currentPage, totalCount, setCurrentPage, perPage }) {
   const paginationRange = usePagination({
     currentPage: +currentPage,
