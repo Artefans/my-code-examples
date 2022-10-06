@@ -1,140 +1,64 @@
 @import 'styles/static/mixins';
+@import 'styles/static/colors';
+
 
 .inputField {
   position: relative;
 
-  --paddingLeft: 14px;
-  --paddingRight: 14px;
-  --iconPaddingRight: 0px;
-  --iconPaddingLeft: 0px;
-  --inputHeight: 48px;
+  --inputHeight: 40px;
+  --borderWidth: 1px;
+  --paddingVertical: 10px;
+  --paddingHorizontal: 12px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 
-  .placeholderMask {
-    pointer-events: none;
-    position: absolute;
-    top: 5px;
-    left: calc(var(--paddingLeft) + 1px);
-    height: calc(var(--inputHeight) - 10px);
-    display: flex;
-    align-items: center;
-    background-color: var(--primaryWhite);
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 24px;
-    color: var(--primaryBlack);
-  }
-
-  .icon {
-    --iconPaddingRight: 40px;
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    height: var(--inputHeight);
-    width: var(--iconPaddingRight);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &.iconWithTitle {
-      top: 30%;
-    }
-  }
-
-  .title {
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 16px;
-    color: var(--primaryBlack60);
-    margin-bottom: 4px;
-    padding: 0 14px;
-  }
-}
-
-.inputLabel {
-  --horizontalPadding: 4px;
-
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 0 var(--horizontalPadding);
-  background: var(--primaryWhiteToInherit);
-  position: absolute;
-  left: calc(var(--paddingLeft) - var(--horizontalPadding));
-  top: 0;
-  transform: translateY(-50%);
-  color: var(--inputLableColor);
-  background-color: var(--primaryWhiteToPrimaryBlack);
-
-  // &:before {
-  //   content: '';
-  //   width: calc(100% + 4px);
-  //   height: 1px;
-  //   left: -2px;
-  //   background-color: var(--primaryWhiteToPrimaryBlack);
-  //   bottom: 7px;
-  //   z-index: -1;
-  //   position: absolute;
-  // }
-
-  &:first-letter {
-    text-transform: uppercase;
-  }
-}
-
-.inputFieldItem {
-  border: 1px solid var(--primaryBlack20);
-  border-radius: 8px;
-  height: var(--inputHeight);
-  width: 100%;
-  padding-right: calc(var(--paddingRight) + var(--iconPaddingRight));
-  padding-left: calc(var(--paddingLeft) + var(--iconPaddingLeft));
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--primaryBlack);
-  background-color: initial;
-
-  &.errorInput {
-    border-color: #e00034;
-  }
-
-  &:focus {
-    border-color: var(--primaryRed);
-  }
-
-  &.rightIcon {
-    --iconPaddingRight: 40px;
-
-    padding-right: var(--iconPaddingRight);
-  }
-
-  &::placeholder {
-    overflow: visible;
-    line-height: 100%;
-    color: #d6d6d6;
-  }
-}
-
-.error {
-  color: #e00034;
-  padding: 6px 4px;
-  font-size: 12px;
-}
-
-@include media {
   .inputLabel {
-    &:before {
-      bottom: 7.3px;
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+
+    color: $color-gray;
+    padding: var(--paddingVertical) var(--paddingHorizontal);
+    left: var(--borderWidth);
+    right: var(--borderWidth);
+    top: var(--borderWidth);
+    height: calc(var(--inputHeight) - (var(--borderWidth) * 2));
+    display: flex;
+    align-items: center;
+    background-color: $color-white;
+    transition: top var(--main-transition), font-size var(--main-transition);
+  }
+
+  &.activeLabel {
+    .inputLabel {
+      background-color: initial;
+      display: inline-flex;
+      width: auto;
+      left: 14px;
+      padding: 0;
+      top: -5px;
+      height: auto;
+      font-size: 10px;
+      line-height: 10px;
+
+      span {
+        padding: 0 2px;
+        background-color: $color-white;
+      }
     }
   }
 
-  .inputField {
-    --inputHeight: 56px;
+  .input {
+    width: 100%;
+    padding: var(--paddingVertical) var(--paddingHorizontal);
+    height: var(--inputHeight);
+    background-color: $color-white;
+    border: var(--borderWidth) solid $color-gray-netspace;
+    color: $color-black;
 
-    .icon.iconWithTitle {
-      top: 24%;
+    &:focus {
+      border-color: $color-blue-dark;
     }
   }
 }

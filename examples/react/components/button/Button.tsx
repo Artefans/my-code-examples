@@ -1,84 +1,65 @@
 import React from 'react';
-import Link from 'next/link';
 import classNames from 'classnames';
+import { LinkProps } from 'next/link';
 import styles from './Button.module.scss';
+import ActiveLink from '../ActiveLink/ActiveLink';
+import { ArrowLeft, ArrowRight } from '../../SvgComponents';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variants
+  arrowRight?: boolean
+  arrowLeft?: boolean
+  href?: string
+}
 
 enum Variants {
-  pill = 'pill',
-  secondary = 'secondary',
-  outline = 'outline',
-  text = 'text',
-  white = 'white',
-  gray = 'gray',
-  border = 'border',
-  black = 'black',
-  blocked = 'blocked',
+  blue = 'blue',
+  red = 'red'
 }
 
-enum ComponentVariants {
-  button = 'button',
-  a = 'a',
-  router = 'router',
-}
+export type ButtonType = ButtonProps
 
-enum Size {
-  normal = 'normal',
-  small = 'small',
-}
-
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
-  to?: string;
-  href?: string;
-  Component?: string | React.JSXElementConstructor<any>;
-  loading?: boolean;
-  variant?: Variants;
-  size?: Size;
-}
-
-const Button: React.FC<ButtonProps> = ({
-  Component = ComponentVariants.button,
-  loading,
-  variant,
+const Button: React.FC<ButtonType> = ({
   children,
-  size,
+  href,
+  variant = Variants.blue,
   className,
-  onClick = () => null,
   ...restProps
 }) => {
-  const classes = classNames([
-    styles.button,
-    {
-      [styles.loading]: loading,
-      [styles.pill]: variant === Variants.pill,
-      [styles.secondary]: variant === Variants.secondary,
-      [styles.outline]: variant === Variants.outline,
-      [styles.small]: size === Size.small,
-      [styles.normal]: size === Size.normal,
-      [styles.textVariant]: variant === Variants.text,
-      [styles.white]: variant === Variants.white,
-      [styles.gray]: variant === Variants.gray,
-      [styles.border]: variant === Variants.border,
-      [styles.black]: variant === Variants.black,
-      [styles.blocked]: variant === Variants.blocked,
-    },
+  const buttonClasses = classNames([
+    styles['button'],
+    styles[`button-${Variants[variant]}`],
     className,
   ]);
 
-  if (Component === ComponentVariants.router && restProps.href) {
+  const InnerComponent = () => {
     return (
-      <Link href={restProps.href}>
-        <a className={classes} onClick={onClick}>
-          {children}
+      <>
+        {!!restProps.arrowLeft && (
+          <ArrowLeft className={styles.left} />
+        )}
+        {children}
+        {!!restProps.arrowRight && (
+          <ArrowRight className={styles.right} />
+        )}
+      </>
+    );
+  };
+
+  if (href) {
+    return (
+      <ActiveLink href={href} {...restProps}>
+        <a className={buttonClasses}>
+          <InnerComponent />
         </a>
-      </Link>
+      </ActiveLink>
     );
   }
 
   return (
-    <Component className={classes} onClick={onClick} {...restProps}>
-      {children}
-    </Component>
+    <button className={buttonClasses} {...restProps}>
+      <InnerComponent />
+    </button>
   );
 };
 

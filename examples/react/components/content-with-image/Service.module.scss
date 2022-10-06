@@ -1,0 +1,57 @@
+@import 'styles/static/mixins';
+@import 'styles/static/colors';
+
+.wrapper {
+  position: relative;
+  z-index: 2;
+
+  .content {
+    width: 100%;
+    margin-bottom: var(--margin-block-little);
+  }
+
+  .picture {
+    position: relative;
+    width: 100%;
+    padding-top: 60%;
+
+    .image {
+      object-fit: contain;
+    }
+  }
+}
+
+@include media() {
+  .wrapper {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+
+    &.reverse {
+      flex-direction: row-reverse;
+
+      .content {
+        margin-left: var(--content-margin);
+        margin-right: 0;
+      }
+    }
+
+    .content {
+      margin-bottom: 0;
+      margin-right: var(--content-margin);
+    }
+
+    .picture {
+      width: var(--image-width);
+      min-width: var(--image-width);
+      min-height: var(--image-height);
+      height: var(--image-height);
+      position: relative;
+      padding-top: 0;
+
+      .image {
+        object-fit: cover;
+      }
+    }
+  }
+}

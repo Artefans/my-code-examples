@@ -1,40 +1,81 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'next-i18next';
-import { HomePhoneInput } from '../../components';
-import { DropDownArrow } from '../../SvgComponents';
+import classNames from 'classnames';
+import styles from './Awards.module.scss';
+import { Breadcrumbs, Button, Service, TextBlock, Title } from '../../ui';
+import PictureWrapper from '../../ui/PictureWrapper/PictureWrapper';
 
-export const moreMeetRef = React.createRef();
-
-const HomeIntro = () => {
-  const user = useSelector((store) => store.auth.user);
-  const { t } = useTranslation();
-
-  const handleScrollToFeatures = () => {
-    moreMeetRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
+const Awards = ({ someData }) => {
   return (
-    <div className={'intro'}>
-      <div className={'intro__background-img flex flex__column'}>
-        <div className={'intro__container flex flex__column'}>
-          <div className={'default-text-block'}>
-            <h2 className={'title text-kit bold'}>{t('Accurate data that makes money!')}</h2>
-            <p className={'subtitle text-kit'}>
-              {t('Amazon intro text')}
-            </p>
-          </div>
-          {!user && <HomePhoneInput />}
-        </div>
-        <div className={'intro__bottom-button-container flex flex__center'}>
-          <button onClick={handleScrollToFeatures} className={'intro__bottom-button'}>
-            <span>{t('More meat')}</span>
-            <DropDownArrow />
-          </button>
-        </div>
+    <>
+      <Breadcrumbs />
+      <div className={classNames(['wrapper margin margin--little'])}>
+        <PictureWrapper
+          size={'115px'}
+          position={{
+            bottom: '-15%',
+            right: '5%',
+          }}>
+          <Service
+            image={'/assets/awards/images/peoples.jpg'}
+            imageWidth={'680px'}
+            imageHeight={'400px'}
+            contentPadding={'130px'}
+          >
+            <Title dashPadding={'40px'} dashVariant={'blue'}>
+              Awards
+            </Title>
+            <TextBlock>
+              <b>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, nobis.
+              </b>
+              <br />
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam dignissimos dolores ea harum
+                inventore ipsa, ipsum labore laborum libero nam numquam provident qui totam ut velit vitae! Dolorem,
+                similique.
+              </p>
+            </TextBlock>
+          </Service>
+        </PictureWrapper>
+        <PictureWrapper
+          hideInMobile
+          size={'115px'}
+          position={{
+            top: '-17%',
+            left: '-5%',
+          }}>
+          <Service
+            reverse
+            image={'/assets/awards/images/working.jpg'}
+            imageWidth={'590px'}
+            imageHeight={'366px'}
+            contentPadding={'80px'}
+            className={'margin--huge'}
+          >
+            <div className={styles.content}>
+              <Title dashPadding={'40px'} titleVariant={'red'} showDash={false}>
+                Lorem ipsum.
+              </Title>
+              <TextBlock>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam aut culpa delectus eveniet optio
+                  pariatur similique, tempora temporibus vitae! Corporis debitis fuga quae quisquam repellat. Adipisci
+                  aliquam aliquid architecto atque commodi consectetur dolorum eaque et eum fugit ipsa itaque labore
+                  laborum molestias natus necessitatibus nobis nostrum odio odit omnis, optio provident rem saepe sequi
+                  similique suscipit ut. Dignissimos, facilis.
+                </p>
+              </TextBlock>
+              <div>
+                <Button className={styles.button} arrowRight href={'/some-link'}>
+                  Read More
+                </Button>
+              </div>
+            </div>
+          </Service>
+        </PictureWrapper>
       </div>
-    </div>
+    </>
   );
 };
 
-export default HomeIntro;
+export default Awards;
